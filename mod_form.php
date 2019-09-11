@@ -126,6 +126,11 @@ class mod_accredible_mod_form extends moodleform_mod {
             foreach ($users_earned_certificate as $user) {
                 $existing_certificate = false;
 
+                // If this user is suspended, do not add them to the list.
+                if ($user->suspended == 1) {
+                    break;
+                }
+
                 foreach ($certificates as $certificate) {
                     // Search through the certificates to see if this user has one existing
                     if ($certificate->recipient->email == $user->email) {
